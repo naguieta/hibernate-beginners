@@ -2,6 +2,11 @@
 package com.research24x7.hibernate.beginners.entity;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,79 +16,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-@Entity (name =  "Employee")
-@Table (name = "employee")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+//para saber que la clase es un entity necesita la siguiente anotacion
+@Entity (name =  "Employee") // lo que esta en parentesis es opcional, si no existe toma el nombre de la clase como nombre del entity
+@Table (name = "employee") //si no existe esta anotacion, hibernate toma el nombre de la clase como nombre de la tabla
 public class Employee {
 
 
-	@Id
-	@GeneratedValue (strategy=GenerationType.IDENTITY)
-	@Column (name="emp_id", nullable=false, unique=true)
-	private int id;
+	@Id //para mapear es mandatorio esta anotacion, esta anotacion define que es el primary key, to_do lo demas es opcional
+	@GeneratedValue (strategy=GenerationType.IDENTITY) //propiedades del primary key, IDENTITY lo define como autoincremental
+	@Column (name="emp_id", nullable=false, unique=true) //propiedades de la columna
+	private int id; //nombre del atributo
 	
 	@Column(name="emp_name", length=28, nullable=false)
 	private String name;
-	
-	@Column(name="emp_role", length=28, nullable=false)
-	private String role;
-	
-	@Column(name="sys_creation", nullable=false)
-	private Date insertTime;
 
+	@Column(name="emp_last_name", length=28, nullable=false)
+	private String lastName;
 
-    public Employee() {
+	@Column(name="emp_dni", length=10, nullable=false)
+	private Long dni;
 
-        super ();
-    }
+	@Column(name="emp_email", length=28, nullable=false)
+	private String email;
 
-    public Employee(String name, String role, Date insertTime) {
-
-        super ();
-
-        this.name = name;
-        this.role = role;
-        this.insertTime = insertTime;
-    }
-
-
-	public int getId () {
-
-		return this.id;
-	}
-
-	public void setId (int id) {
-
-		this.id = id;
-	}
-
-	public String getName () {
-
-		return this.name;
-	}
-
-	public void setName (String name) {
-
-	    this.name = name;
-	}
-
-	public String getRole () {
-
-		return this.role;
-	}
-
-	public void setRole (String role) {
-
-	    this.role = role;
-	}
-
-	public Date getInsertTime () {
-
-		return this.insertTime;
-	}
-
-	public void setInsertTime (Date insertTime) {
-
-		this.insertTime = insertTime;
-	}
+	@Column(name="emp_mobile", length=28, nullable=false)
+	private String mobile;
 }
